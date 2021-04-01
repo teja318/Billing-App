@@ -14,7 +14,7 @@ const App = (props) =>{
 
   return (
     <div>
-      <h1>User Auth</h1>
+      <h2 style={{textAlign: 'center'}}>Billing Application</h2>
       <NavBar userLoggedIn={userLoggedIn} handleAuth={handleAuth} />
     </div>
   )

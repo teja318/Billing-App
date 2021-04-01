@@ -1,4 +1,5 @@
 import axios from 'axios'
+import swal from 'sweetalert'
 export const startGetCustomers = () =>{
     return(dispatch) =>{
         axios.get('http://dct-billing-app.herokuapp.com/api/customers', {
@@ -9,14 +10,14 @@ export const startGetCustomers = () =>{
         .then((response) => {
             const result = response.data
             if(result.hasOwnProperty("errors")){
-               alert(result.message)
+               swal(result.message)
             }else{
                 dispatch(setCustomers(result))
             }
                 
         })
         .catch((error) => {
-            alert(error.message)
+            swal(error.message)
         })
     } 
 }
@@ -39,14 +40,14 @@ export const startAddCustomers = (formdata) =>{
         .then((response) => {
             const result = response.data
             if(result.hasOwnProperty("errors")){
-               alert(result.message)
+               swal(result.message)
             }else{
                 dispatch(addCustomers(result))
             }
                 
         })
         .catch((error) => {
-            alert(error.message)
+            swal(error.message)
         })
     } 
 }
@@ -70,9 +71,9 @@ export const startGetRemove =(id)=>{
         .then((response)=>{
             const result = response.data
             if(Object.keys(result).includes('errors')){
-                alert(result.message)
+                swal(result.message)
             } else{
-                alert("successfully removed the customers ")
+                swal("successfully removed the customers ")
                 dispatch(remove(result))
             }
         })
@@ -96,9 +97,9 @@ export const startEditCustomer=(formData,id)=>{
             .then((response)=>{
                 const result = response.data
                 if(Object.keys(result).includes('errors')){
-                    alert(result.message)
+                    swal(result.message)
                 } else {
-                    alert("successfully Edit the customer information")
+                    swal("successfully Edit the customer information")
                     dispatch(editCustomer(result))
                 }
             })

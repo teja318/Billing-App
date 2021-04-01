@@ -11,7 +11,7 @@ const Account = (props) =>{
     },[dispatch])   
     return(
         <div>
-            <h2>User Account Details </h2>
+            <h2>User Profile</h2>
             <h3>User Name :{user.username}</h3>
             <h3>User email :{user.email}</h3>
         </div>

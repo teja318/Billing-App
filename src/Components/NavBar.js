@@ -6,33 +6,50 @@ import Login from '../Components/User-Auth/LogIn'
 import Account from '../Components/User-Auth/Account'
 import ProductsContainer from './Products/ProductsContainer'
 import CustomersContainer from './Customers/CustomersContainer'
+import BillContainer from './Billing/BillContainer'
+import swal from 'sweetalert'
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
+import HomeIcon from '@material-ui/icons/Home'
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+
 const NavBar = (props) =>{
     const {userLoggedIn, handleAuth} = props
     return (
         <div>
-            
-                <Link to="/">Home</Link> |
+           <AppBar position="static">
+            <Toolbar color="pink">
+                <Button variant="contained" component={Link} to='/'>
+                    <HomeIcon /> 
+                </Button>
                 {
                     userLoggedIn? (
                         <>
-                            <Link to="/account">Account</Link> |
-                            <Link to="/products">Products</Link> |
-                            <Link to="/customers">Customers</Link> |
-                            <Link  to='/'onClick={() => {
-                                localStorage.removeItem('token')
-                                alert('successfully logout')
-                                handleAuth()
-                            }}>LogOut</Link> 
+                            <Button  component={Link} to="/account"> <AccountCircleIcon /> </Button>
+                            <Button component={Link} to="/products">Products </Button>
+                            <Button component={Link} to="/customers"> Customers </Button>
+                            <Button component={Link} to="/Bills">Bills </Button>
+                            <Button component={Link} to='/'
+                                onClick={() => {
+                                    localStorage.removeItem('token')
+                                    swal('successfully logout')
+                                    handleAuth()
+                                }}>LogOut
+                                
+                            </Button>
+
                         </>
                     ) : (
                         <>
-                            <Link to="/register">Register</Link> |
-                            <Link to="/login">Login</Link>
+                            <Button component={Link} to="/register"> Register</Button> 
+                            <Button component={Link} to="/login"> Login </Button> 
                         </>
                     ) 
                 }
+            </Toolbar>
+            </AppBar> 
             
-
             <Route path="/" component={Home} exact={true} />
             <Route path="/register" component={Register} />
             <Route path="/login" render={ (props) => {
@@ -44,8 +61,9 @@ const NavBar = (props) =>{
             <Route path="/account" component={Account} />
             <Route path="/products" component={ProductsContainer} />
             <Route path="/customers" component={CustomersContainer} />
-        
+            <Route path="/bills" component={BillContainer} />
         </div>
+        
     )
 }
 export default withRouter(NavBar)

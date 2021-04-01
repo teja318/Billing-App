@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import swal from 'sweetalert'
 export const startGetUsers = (formData, navigate) =>{
     return(dispatch) =>{
         axios.post('http://dct-billing-app.herokuapp.com/api/users/register', formData)
@@ -7,10 +7,10 @@ export const startGetUsers = (formData, navigate) =>{
             const result = response.data
             console.log('action', result)
             if(result.hasOwnProperty("errors")){ //Object.keys(result).includes('errors')
-                alert(result.message)
+                swal(result.message)
                 
             }else{
-                alert("successfully created")
+                swal("successfully created")
                 dispatch(setUsers(result))
                 navigate('/login')
             }
