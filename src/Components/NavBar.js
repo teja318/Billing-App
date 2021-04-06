@@ -7,30 +7,44 @@ import Account from '../Components/User-Auth/Account'
 import ProductsContainer from './Products/ProductsContainer'
 import CustomersContainer from './Customers/CustomersContainer'
 import BillContainer from './Billing/BillContainer'
+import CustomerBills from '../Components/Billing/CustomerBills'
+
 import swal from 'sweetalert'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import HomeIcon from '@material-ui/icons/Home'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import {makeStyles} from '@material-ui/core/styles'
+import { Typography } from '@material-ui/core'
 
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      '& > *': {
+        margin: theme.spacing(1),
+      },
+    },
+}));
 const NavBar = (props) =>{
     const {userLoggedIn, handleAuth} = props
+    const classes = useStyles()
     return (
-        <div>
-           <AppBar position="static">
-            <Toolbar color="pink">
-                <Button variant="contained" component={Link} to='/'>
+        <div >
+           <AppBar color="secondary" position="static">
+            <Toolbar >
+                <Typography><Button  style={{flexGrow: 1}} edge="end" component={Link} to='/' >
                     <HomeIcon /> 
                 </Button>
+                </Typography>
                 {
                     userLoggedIn? (
                         <>
-                            <Button  component={Link} to="/account"> <AccountCircleIcon /> </Button>
+                            <Button className={classes.root}   component={Link} to="/account"> <AccountCircleIcon /> </Button>
                             <Button component={Link} to="/products">Products </Button>
                             <Button component={Link} to="/customers"> Customers </Button>
                             <Button component={Link} to="/Bills">Bills </Button>
-                            <Button component={Link} to='/'
+                            <Button  component={Link} to='/'
                                 onClick={() => {
                                     localStorage.removeItem('token')
                                     swal('successfully logout')
@@ -62,6 +76,7 @@ const NavBar = (props) =>{
             <Route path="/products" component={ProductsContainer} />
             <Route path="/customers" component={CustomersContainer} />
             <Route path="/bills" component={BillContainer} />
+            <Route path = "/customerbills/:id" component = {CustomerBills}/>
         </div>
         
     )

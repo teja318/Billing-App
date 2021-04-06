@@ -1,4 +1,6 @@
 import axios from 'axios'
+import swal from 'sweetalert'
+
 export const startGetproducts = () =>{
     return(dispatch) =>{
         axios.get('http://dct-billing-app.herokuapp.com/api/products', {
@@ -10,14 +12,14 @@ export const startGetproducts = () =>{
             const result = response.data
             //console.log('action result', result)
             if(result.hasOwnProperty("errors")){
-               alert(result.message)
+               swal(result.message)
             }else{
                 dispatch(setProducts(result))
             }
                 
         })
         .catch((error) => {
-            alert(error.message)
+            swal(error.message)
         })
     } 
 }
@@ -40,14 +42,14 @@ export const startAddproducts = (formdata) =>{
         .then((response) => {
             const result = response.data
             if(result.hasOwnProperty("errors")){
-               alert(result.message)
+               swal(result.message)
             }else{
                 dispatch(addproducts(result))
             }
                 
         })
         .catch((error) => {
-            alert(error.message)
+            swal(error.message)
         })
     } 
 }
@@ -71,9 +73,9 @@ export const startGetRemove =(id)=>{
         .then((response)=>{
             const result = response.data
             if(Object.keys(result).includes('errors')){
-                alert(result.message)
+                swal(result.message)
             } else{
-                //alert("successfully removed the product ")
+                //swal("successfully removed the product ")
                 dispatch(remove(result))
             }
         })
@@ -97,9 +99,9 @@ export const startEditProduct=(formData,id)=>{
             .then((response)=>{
                 const result = response.data
                 if(Object.keys(result).includes('errors')){
-                    alert(result.message)
+                    swal(result.message)
                 } else {
-                    alert("successfully Edit the product information")
+                    swal("successfully Edit the product information")
                     dispatch(editProduct(result))
                 }
             })

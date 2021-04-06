@@ -4,6 +4,8 @@ import CustomerItem from './CustomerItem'
 
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
+import SearchIcon from '@material-ui/icons/Search'
+import InputAdornment from "@material-ui/core/InputAdornment"
 
 const CustomersList = (props) =>{
     const[search, setSearch] = useState('')
@@ -32,6 +34,13 @@ const CustomersList = (props) =>{
                 placeholder = "Search by name..." 
                 onChange = {handleChange} 
                 value = {search}
+                InputProps={{
+                    startAdornment: (
+                        <InputAdornment position="start">
+                           <SearchIcon />
+                        </InputAdornment>
+                    ),
+                }}
             />
             <Grid container spacing={2} style={{overflowY : 'scroll', maxHeight : '400px'}} >
             

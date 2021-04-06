@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import {startGetRemove} from '../../Actions/customersAction'
 import EditCustomer from './EditCustomer'
+
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
@@ -11,6 +12,11 @@ import Typography from '@material-ui/core/Typography'
 import CardActionArea from '@material-ui/core/CardActionArea'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
+import ReceiptIcon from '@material-ui/icons/Receipt';
+import Link from '@material-ui/core/Link'
+import Avatar from '@material-ui/core/Avatar'
+import IconButton from '@material-ui/core/IconButton'
+import CardHeader from '@material-ui/core/Avatar'
 
 const useStyles = makeStyles({
     root: {
@@ -51,14 +57,15 @@ const CustomerItem = (props) =>{
                     </div>
                 ) : (
                     
-                    <Card elevation={4} className={classes.root}>
+                    <Card elevation={4} className={classes.root} align="center">
                         <CardActionArea>
                             <CardContent>
-                                <Typography variant="h5" component="h2"  >
-                                    Name: {name}
-                                </Typography>
-                                
-                                <Typography variant="h5" component="h2" className={classes.title}>
+                                <Link href={`/customerbills/${_id}`} variant="body2">
+                                    <Typography variant="h5" component="h2" className={classes.pos} >
+                                        {name}
+                                    </Typography>
+                                </Link>
+                                <Typography variant="h5" component="h2" className={classes.pos}>
                                    Email: {email}
                                 </Typography>
                                 <Typography variant="h5" component="h2" className={classes.pos} >
@@ -66,7 +73,7 @@ const CustomerItem = (props) =>{
                                 </Typography>
                             </CardContent>
                         </CardActionArea>
-                        <CardActions>
+                        <CardActions align="center">
                             <Button onClick = {handleToggle} color="primary" ><EditIcon fontSize="small"/></Button>  
                             <Button onClick = {handleRemove} color="secondary" ><DeleteIcon fontSize="small"/></Button>
                         </CardActions>

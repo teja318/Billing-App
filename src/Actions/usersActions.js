@@ -17,7 +17,7 @@ export const startGetUsers = (formData, navigate) =>{
                 
         })
         .catch((error) => {
-            alert(error.message)
+            swal(error.message)
         })
     }
 }

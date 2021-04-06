@@ -4,7 +4,7 @@ import ProductItem from './ProductItem'
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
 import SearchIcon from '@material-ui/icons/Search'
-
+import InputAdornment from "@material-ui/core/InputAdornment"
 const ProductsList = (props) =>{
     const[search, setSearch] = useState('')
     const products = useSelector((state) =>{
@@ -21,15 +21,23 @@ const ProductsList = (props) =>{
     })
     return (
         <div>
-            <h2>Products List -{products.length}</h2>
+            <h2 style={{color: "blue"}} >Products List</h2>
             <TextField  
                 style={{width: '30%', marginBottom : '25px'}}
                 variant="outlined"
                 size="small"
                 type = "text" 
-                // placeholder = `<SearchIcon /> Search by name...`
+                placeholder = 'Search by name...'
                 onChange = {handleChange} 
                 value = {search}
+                InputProps={{
+                    startAdornment: (
+                        <InputAdornment position="start">
+                           <SearchIcon />
+                        </InputAdornment>
+                    ),
+                }}
+  
             />
             <Grid container spacing={2} style={{overflowY : 'scroll', maxHeight : '400px'}} >
                 {productsData.map((product, i) => {

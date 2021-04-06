@@ -1,14 +1,20 @@
-import React  from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
+import BillItem from './BillItem'
+
 const BillList = (props) =>{
     
     const bills = useSelector((state) =>{
         return state.bills
     })
-
+   
     return (
         <div>
-            <h2>Bills</h2>
+            <h2>Bills List</h2>
+           
+            {bills.map((ele,i) =>{
+                return <BillItem key={i} {...ele}  />
+            })}
 
         </div>
     )

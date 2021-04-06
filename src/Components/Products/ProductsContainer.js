@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
       flexGrow: 1,
     },
     paper: {
-      padding: theme.spacing(2),
+      paddingTop: theme.spacing(1),
       textAlign: 'center',
       color: theme.palette.text.secondary,
     },
@@ -28,7 +28,7 @@ const ProductsContainer = (props) => {
     
     return (
         <div className={classes.root}>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} >
          <Grid item xs={9}>
             <Paper className={classes.paper}><ProductsList /></Paper>
           </Grid>

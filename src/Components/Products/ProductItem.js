@@ -52,7 +52,7 @@ const ProductItem = (props) =>{
                         <EditProduct id = {_id} name = {name} price = {price} handleToggle ={handleToggle}/> 
                     </div>
                 ) : (
-                    <Card elevation={4} className={classes.root}>
+                    <Card elevation={4} className={classes.root} align="center">
                         <CardActionArea>
                             <CardContent>
                                 {/* <Typography className={classes.title} color="textSecondary" gutterBottom>
@@ -67,7 +67,7 @@ const ProductItem = (props) =>{
                             </CardContent>
                         </CardActionArea>
                         <CardActions>
-                            <Button onClick = {handleToggle} color="primary"  ><EditIcon fontSize="small"/></Button>  
+                            <Button onClick = {handleToggle} color="primary" align="right"  ><EditIcon fontSize="small"/></Button>  
                             <Button onClick = {handleRemove} color="secondary" edge="end" ><DeleteIcon fontSize="small"/></Button>
                         </CardActions>
                     </Card>
