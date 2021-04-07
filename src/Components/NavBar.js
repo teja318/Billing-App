@@ -78,7 +78,6 @@ const NavBar = (props) =>{
             <Route path="/bills" component={BillContainer} />
             <Route path = "/customerbills/:id" component = {CustomerBills}/>
         </div>
-        
     )
 }
 export default withRouter(NavBar)

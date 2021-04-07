@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import axios from 'axios'
+import swal from 'sweetalert'
+
 import validator from 'validator'
-import {startGetUsers} from '../../Actions/usersActions'
+
 //material ui
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -34,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
 }));
   
 const Register = (props) =>{
-    const dispatch = useDispatch()
     const classes = useStyles()
 
     const[username, setUsername] = useState('')
@@ -98,8 +99,22 @@ const Register = (props) =>{
                 businessName: businessName,
                 address: address
             }
-            dispatch(startGetUsers(formData, props.history.push))
-        
+            
+            axios.post('http://dct-billing-app.herokuapp.com/api/users/register', formData)
+            .then((response) => {
+                const result = response.data
+                console.log('action', result)
+                if(result.hasOwnProperty("errors")){ //Object.keys(result).includes('errors')
+                    swal(result.message)
+                }else{
+                    swal("successfully created")
+                    props.history.push('/login')
+                }
+                
+            })
+            .catch((error) => {
+                swal(error.message)
+            })
             setUsername('')
             setEmail('')
             setPassword('')

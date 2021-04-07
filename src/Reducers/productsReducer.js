@@ -12,6 +12,7 @@ const productsReducer = (state = productsInitialValue, action) =>{
             return [...state]
         }
         case "REMOVE" :{
+            console.log(action.payload)
             return state.filter(ele=> ele._id !== action.payload._id)
             
         }

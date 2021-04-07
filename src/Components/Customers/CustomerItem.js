@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import {startGetRemove} from '../../Actions/customersAction'
 import EditCustomer from './EditCustomer'
-
+import swal from 'sweetalert'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
@@ -12,11 +12,7 @@ import Typography from '@material-ui/core/Typography'
 import CardActionArea from '@material-ui/core/CardActionArea'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
-import ReceiptIcon from '@material-ui/icons/Receipt';
 import Link from '@material-ui/core/Link'
-import Avatar from '@material-ui/core/Avatar'
-import IconButton from '@material-ui/core/IconButton'
-import CardHeader from '@material-ui/core/Avatar'
 
 const useStyles = makeStyles({
     root: {
@@ -40,10 +36,19 @@ const CustomerItem = (props) =>{
     const {_id, name, email, mobile} = props
     const [toggle, setToggle] = useState(false)
     const handleRemove =() =>{
-        const conformation = window.confirm(`Are you sure to remove the ${name} from the list `)
-        if(conformation){
-            dispatch(startGetRemove(_id))
-        }
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this product!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        
+        .then((conformation) => {
+            if (conformation) {
+                dispatch(startGetRemove(_id))
+            } 
+        })
     }
     const handleToggle = () =>{
         setToggle(!toggle)

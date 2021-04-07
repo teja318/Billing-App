@@ -39,7 +39,7 @@ export const startAddBill = (bill) => {
         })
         .then((response) => {
             const result = response.data
-            console.log('added bill',result)
+            //console.log('added bill',result)
             if(result.hasOwnProperty("errors")){
                 swal({title : result.message ,icon : 'error'})
             }else {
@@ -52,9 +52,37 @@ export const startAddBill = (bill) => {
     }
 }
 
-export const addBill = (bill) => {
+export const addBill = (data) => {
     return {
         type : 'ADD_BILL',
-        payload : bill
+        payload : data
+    }
+}
+
+export const startRemoveBill = (id) => {
+    return (dispatch) => {
+        axios.delete(`http://dct-billing-app.herokuapp.com/api/bills/${id}`, {
+            headers : {
+                'Authorization' : `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+        .then((response) => {
+            const result = response.data
+            dispatch(remove(result))
+            swal("Bill has been deleted!", {
+                icon: "success",
+            })
+                   
+        })
+        .catch((err) => {
+           swal(err.message)
+        })
+    }
+}
+
+export const remove = (data) => {
+    return {
+        type : 'REMOVE',
+        payload : data
     }
 }

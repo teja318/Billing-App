@@ -25,33 +25,44 @@ const CustomersList = (props) =>{
     
     return (
         <div>
-            <h2>Customers List -{customers.length}</h2>
-            <TextField  
-                style={{width: '30%', marginBottom : '25px'}}
-                variant="outlined"
-                size="small"
-                type = "text" 
-                placeholder = "Search by name..." 
-                onChange = {handleChange} 
-                value = {search}
-                InputProps={{
-                    startAdornment: (
-                        <InputAdornment position="start">
-                           <SearchIcon />
-                        </InputAdornment>
-                    ),
-                }}
-            />
-            <Grid container spacing={2} style={{overflowY : 'scroll', maxHeight : '400px'}} >
-            
-                {customersData.map((ele,i) => {
-                    return (
-                        <Grid item xs={4} key={i}>
-                            <CustomerItem  {...ele} />
+            {
+                customers.length === 0? (
+                    <div>
+                        <h3>No customers are found</h3>
+                        <p>Add customers</p>
+                    </div>
+                ) : (
+                    <div>
+                        <h2 style={{color: "blue"}} >Customers List </h2>
+                        <TextField  
+                            style={{width: '30%', marginBottom : '25px'}}
+                            variant="outlined"
+                            size="small"
+                            type = "text" 
+                            placeholder = 'Search by name...'
+                            onChange = {handleChange} 
+                            value = {search}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                       <SearchIcon />
+                                    </InputAdornment>
+                                ),
+                            }}
+  
+                        />
+                        <Grid container spacing={2} style={{overflowY : 'scroll', maxHeight : '400px'}} >
+                            {customersData.map((ele,i) => {
+                                return (
+                                    <Grid item xs={4} key={i}>
+                                        <CustomerItem  {...ele} />
+                                    </Grid>
+                                )
+                            })}
                         </Grid>
-                    )
-                })}
-            </Grid>
+                    </div>
+                )
+            }
         </div>
     )
 }

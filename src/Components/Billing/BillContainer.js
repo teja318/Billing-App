@@ -28,10 +28,10 @@ const BillContainer=(props) =>{
     return (
         <div>
            <Grid container spacing={2}>
-         <Grid item xs={9}>
+         <Grid item xs={8}>
             <Paper className={classes.paper}><BillList /></Paper>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <Paper className={classes.paper}><BillForm /></Paper>
           </Grid>
           

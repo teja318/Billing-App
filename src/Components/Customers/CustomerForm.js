@@ -72,7 +72,7 @@ const CustomerForm = (props) =>{
     }
     return(
         <div>
-            {NAME? <h2>Edit Customer</h2> : <h2>Add Customer</h2>}
+            {NAME? <h2 style={{color: "blue"}}>Edit Customer</h2> : <h2 style={{color: "blue"}}>Add Customer</h2>}
             <form onSubmit={handleSubmit}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}> 

@@ -80,10 +80,10 @@ export const startGetRemove =(id)=>{
     }
 }
 
-export const remove=(id)=>{
+export const remove=(data)=>{
     return {
         type : "REMOVE",
-        payload : id
+        payload : data
     }
 }
 

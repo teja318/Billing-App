@@ -1,7 +1,6 @@
-import React,{useEffect} from 'react'
-import { useSelector, useDispatch} from 'react-redux'
-import {startGetCustomers} from '../../Actions/customersAction'
-import {startGetproducts} from '../../Actions/productAction'
+import React from 'react'
+import { useSelector} from 'react-redux'
+import {totalBill} from './totalBillfunction'
 import {Card, CardActions, Button, CardContent, Container, Grid, Typography} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core/styles'
 import {Table, TableBody, TableCell, TableHead, TableRow} from '@material-ui/core';
@@ -19,13 +18,9 @@ const useStyles = makeStyles((theme)=>({
 }))
 
 export default function CustomerBillsList(props) {
-    const {_id,date,customer,lineItems} = props
-    const dispatch = useDispatch()
+    const {date,customer,lineItems} = props
     const classes = useStyles()
-    useEffect(()=>{
-        dispatch(startGetproducts())
-        dispatch(startGetCustomers())
-    }, [dispatch])
+    
     
     // customer Name
     const customerName = useSelector((state)=>{
@@ -40,13 +35,7 @@ export default function CustomerBillsList(props) {
         }  
         return result
     })
-    const totalBill = () => {
-        let total = 0
-        lineItems.forEach((item) => {
-          total += (item.price * item.quantity)
-        })
-        return total
-    }
+    
     
     return (
         <div>
@@ -82,7 +71,7 @@ export default function CustomerBillsList(props) {
                                 </Table>
 
                                 <Typography variant="body2" align="right" color="textSecondary" component="p">
-                                    <b>Total: ₹{totalBill()}</b>
+                                    <b>Total: ₹{totalBill(lineItems)}</b>
                                 </Typography>
                             </CardContent>
                             <CardActions>

@@ -1,15 +1,20 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-
+import { useDispatch, useSelector } from 'react-redux'
+import {startRemoveBill} from '../../Actions/billsAction'
+import {totalBill} from './totalBillfunction'
+import swal from 'sweetalert'
 import DeleteIcon from '@material-ui/icons/Delete'
 import {Card, CardActionArea, CardActions, CardContent, Button, Typography} from '@material-ui/core';
 import {Table, TableBody, TableCell, TableHead, TableRow} from '@material-ui/core';
 
 const BillItem = (props)=>{
+    const dispatch = useDispatch()
     const {_id, date, customer, lineItems } = props
+
     const customerDetials = useSelector((state) =>{
         return state.customers.find(cus => cus._id === customer)
     })
+   
     const productsName = useSelector((state) => {
         const arr = []
         for(const item of lineItems){
@@ -18,15 +23,25 @@ const BillItem = (props)=>{
         }
         return arr
     })
-    const totalBill = () => {
-        let total = 0
-        lineItems.forEach((item) => {
-          total += (item.price * item.quantity)
+    
+    
+    const handleRemove =() =>{
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this product!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
         })
-        return total
+        
+        .then((conformation) => {
+            if (conformation) {
+                dispatch(startRemoveBill(_id))
+            } 
+        })
     }
     return(
-        <div>
+        <div >
             <Card elevation={4}>
                 <CardActionArea>
                     <CardContent>
@@ -67,19 +82,15 @@ const BillItem = (props)=>{
                             
                          
                           <Typography variant="body2" align="right" color="textSecondary" component="p">
-                            <b>Total: ₹{totalBill()}</b>
+                            <b>Total: ₹{totalBill(lineItems)}</b>
                           </Typography>
-                        </CardContent>
-                      </CardActionArea>
-                      <CardActions>
-                        {/* <Button size="small" color="primary" onClick={handleBillBtn} >
-                          <Link to="/showBill" >Bill</Link>
-                        </Button>
-                        <Button size="small" color="secondary" onClick={() => {
-                                        handleRemove(_id)
-                                    }}>
-                          <DeleteIcon fontSize="small"/>
-                        </Button> */}
+                    </CardContent>
+                </CardActionArea>
+                <CardActions>
+                    <Button>Show Bill</Button>
+                    <Button size="small" color="secondary" onClick={handleRemove}>
+                        <DeleteIcon fontSize="small"/>
+                    </Button>
                 </CardActions>
             </Card>
         </div>

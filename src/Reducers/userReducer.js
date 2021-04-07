@@ -1,16 +1,16 @@
-const accountInitialValue = {}
+const userInitialValue = {}
 
-const accountReducer = (state=accountInitialValue,action)=>{
+const userReducer = (state=userInitialValue,action)=>{
     switch(action.type){
         case "ACCOUNT_INFO" : {
             return {...action.payload}
         }
         case "CLEAR" :{
-           return accountInitialValue
+           return userInitialValue
         }
         default : {
             return state
         }
     }
 }
-export default accountReducer
+export default userReducer

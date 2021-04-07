@@ -53,16 +53,20 @@ const BillForm = (props) =>{
     setDate(e.target.value)
   }
   const handleCustomerChange =(e, param) => {
-    console.log(param)
+    //console.log(e.target.value)
     if(param){
       setCustomer(param._id )
+    }else{
+      setCustomer('')
     }
   }
   const handleProductChange =(e, param) => {
-    console.log(param)
+    //console.log(param)
     if(param){
       setProduct(param._id )
       itemGenerator(param)
+    }else{
+      setProduct('')
     }
   }
   const itemGenerator = (item) => {
@@ -112,7 +116,7 @@ const BillForm = (props) =>{
     })
     return total
   }
-  //console.log('p', product.length)
+  
   return (
     <div>
       <form className={classes.container} onSubmit={handleSubmit} noValidate>
@@ -129,24 +133,27 @@ const BillForm = (props) =>{
               }}
             />    
             <Autocomplete
-              options={customers}
-              getOptionLabel={(customer) => customer.name}
+              //options={customers}
+              // getOptionLabel={(customer) => customer.name}
+              options={customers.map((option) => option? option.name : "")}
               onChange={handleCustomerChange}
               className={classes.textField}
               style={{width:"194px", marginTop: '20px'}}
               renderInput={(params) => (
                 <TextField {...params} label="customer" variant="outlined" fullWidth />
               )}
+              
             />
             <Autocomplete
               options={products}
-              getOptionLabel={(product) => product.name}
+              getOptionLabel={(product) => (product? product.name : "" )}
               onChange={handleProductChange}
               className={classes.textField}
               style={{width:"194px", marginTop: '20px'}}
               renderInput={(params) => (
                 <TextField {...params} label="product" variant="outlined" fullWidth />
               )}
+              
             />
             
           </Grid>
@@ -173,7 +180,7 @@ const BillForm = (props) =>{
                   <Button size="small" color="primary"
                     onClick={() => {handleIncre(item._Id)}}> <AddCircleSharpIcon />
                   </Button>
-                  
+                  ₹{item.quantity * item.price}
                   <Button size="small" color="secondary"
                     onClick={() => {handleRemove(item._Id)}} > <CancelSharpIcon /> 
                   </Button>
@@ -183,7 +190,7 @@ const BillForm = (props) =>{
             
           )
         })}
-        {lineItems.length > 0 ? `Total: ${totalBill()}` : '' }
+        {lineItems.length > 0 ? `Total: ₹${totalBill()}` : '' }
       </Grid>
     </div>
   )
