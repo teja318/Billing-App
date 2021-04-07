@@ -4,15 +4,7 @@ The best Billing & Inventory management application made simple and easy for dom
 
 ## Packages
 
-Axios, react-redux, redux, redux-thunk, react-router-dom, swal, material-ui, validator
-
-
-### `npm start`
-
-Runs the app in the development mode.\
-
-
-
+Axios, react-redux, redux, redux-thunk, react-router-dom, sweetalert, material-ui, validator
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
