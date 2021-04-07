@@ -6,5 +6,5 @@ The best Billing & Inventory management application made simple and easy for dom
 
 Axios, react-redux, redux, redux-thunk, react-router-dom, sweetalert, material-ui, validator
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
 
